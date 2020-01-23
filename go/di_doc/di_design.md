@@ -45,10 +45,15 @@
 
   上記の制約を元にして先人の知恵を借り、レイヤードアーキテクチャのモデルを作ってみる
 
-### User-Infoを返すAPIを作成してみる
-1.Domain層にモデルを作成   `domain/model/UserInfo.go`
+  ![](./img/dependency_direction2.png)
 
-**Domain層はシステムが担うビジネスロジックのモデルを定義**するところである。
+### User-Infoを返すAPIを作成してみる
+
+#### 1.Domain層にモデルを作成   
+
+`domain/model/UserInfo.go`
+
+**Domain層はシステムが担うビジネスロジックのモデルを定義** するところである。
 今回の場合、ユーザの情報すなわちUserInfoを返したいのでその元となるモデルを作成する。
 
   ```go
@@ -64,6 +69,116 @@
     Join  time.time,
   }
   ```
+#### 1-2.Domain層にRepositoryを作成   
 
+  `domain/Repository/UserInfo.go`
 
-  [参考文献](https://yyh-gl.github.io/tech-blog/blog/go_web_api/)
+  リポジトリではDBや[KVS](https://qiita.com/uenohara/items/23eb6ee1259f8a927445)などで行うCRUD処理の定義を行う
+  またこのレイヤでは`技術的な関心を持たない`ため、インタフェースの定義のみを行う
+
+  [goのContextについて](https://ayasuda.github.io/pages/what_is_context_at_go.html)
+
+ HTTPレスポンスがタイムアウトした場合などに
+ 安全にコントールできる仕組みを提供している
+ channelよりも簡単に実装できる
+
+  ```go
+  package repository
+  import(
+  "context"
+  "github.com/VSN-YK/go-api-server-by-cleanArchitecture/domain/model"
+
+  type UserInfoRepository interface{
+    // すべてのユーザ情報を返す関数
+    GetAllUserInfo(context.Context)([]*model.UserInfo, error)
+  }
+)
+```
+
+#### 2.Infra層にDomain層で定義したRepositoryの実装を行う
+
+```go
+package persistance
+import (
+  "context"
+  "time"
+
+  "github.com/VSN-YK/go-api-server-by-cleanArchitecture/domain/model"
+
+  "github.com/VSN-YK/go-api-server-by-cleanArchitecture/domain/repository"
+
+)
+
+//UserInfoは永続的なデータ構造を持つ
+type UserInfoPersistance struct{}
+
+//初期化
+func NewUserInfoPersistance () repository.UserInfoRepository{
+  return &UserInfoPersistance{}
+}
+
+//Repositoryに実装を行う
+func (up *UserInfoPersistance) GetAllUserInfo(context.Context)([]*model.UserInfo , error){
+  user1 :=model.UserInfo
+  user1.Id = "F0001"
+  user1.Name = "Kate"
+  user1.Age = 20
+  user.Join = time.Now().Add(-23 * time.Hour)
+
+  user2 :=model.UserInfo
+  user2.Id = "M0001"
+  user2.Name = "Jone"
+  user2.Age = 20
+  user2.Join = time.Now().Add(-23 * 6 * time.Hour)
+
+  return []*model.UserInfo{&user1 , &user2},nil
+
+}
+```
+#### 3.UseCase(Service)層についての実装
+
+domian層で定義している関数を用いて任意のビジネスロジックを実装を行うレイヤ
+
+```go
+package usecase
+import (
+  "context"
+
+  "github.com/VSN-YK/go-api-server-by-cleanArchitecture/domain/model"
+  "github.com/VSN-YK/go-api-server-by-cleanArchitecture/domain/repository"
+)
+
+type UserInfoUseCase interface {
+  GetAllUserInfo(context.Context)([]*model.UserInfo)
+}
+
+type UserInfoCase struct {
+  UserInfoRepository repository.UserInfoRepository
+}
+
+func NewUserInfoUseCase(ur repository.UserInfoRepository) UserInfoCase{
+  return &UserInfoCase{
+    UserInfoRepository : ur,
+  }
+}
+
+func (ur UserInfoUseCase)GetAllUserInfo(ctx context.Context) (usersinfo []*model.UserInfo ,error ){
+  //persistance (Repository) 呼び出し
+ usersinfo , err = ur.UserInfoRepository.GetAllUserInfo(ctx){
+   if err !=nil{
+     return nil , err
+   }
+   return usersinfo , nil
+ }
+}
+```
+
+### 感想
+
+interfaceの基礎的な部分はおさえているが、応用した使い方をマスターしていないため、まだ理解度としては50%程度であると感じました。
+そのため先ずは蔑ろになっている基礎がないか
+検証を行ったうえで再度デザインパターンに取り組みたいと思いました。
+
+- [比較的わかりやすい参考文献](https://qiita.com/tono-maron/items/345c433b86f74d314c8d)
+
+- [レイヤードアーキテクチャ参考文献](https://yyh-gl.github.io/tech-blog/blog/go_web_api/)
