@@ -1,5 +1,8 @@
 ## Ice Break Scrum Team Working Agreement(WA)
 
+### Ice Breakの改修は午後から行う
+- 個人のタスクを優先にしたいため
+
 ### 8:50 ~ 9:00 Dairy Scrum (朝会)
 
 カレンダー(月～金)
