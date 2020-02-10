@@ -6,5 +6,9 @@ image_resource:
   source: {repository: busybox}
 
 run:
-  path: echo
-  args: [hello VSN World]
+  path: /bin/bash
+  args: 
+   - -c
+   - |
+     echo "Hello-VSN1"
+     
