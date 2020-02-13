@@ -3,6 +3,14 @@ package main
 import(
 	"fmt"
 )
+
+type MapKeyStruct struct {
+	ID string
+	NAME string
+}
+
+type PointZ struct {x , y , z int}
+
 // Normal Difinition
 type GoStruct struct {	
 	x int
@@ -29,6 +37,7 @@ type Point struct {
 	X int
 	Y int
 }
+
 func swap(p Point){
 	fmt.Println(p) //ByValue
 	x , y := p.Y , p.X
@@ -66,5 +75,35 @@ func main () {
 	swap(p)
 	fmt.Printf("ByValue: %v\n", p)
 	swapByRef(&p)
-	fmt.Printf("ByRef: %v" , p)
+	fmt.Printf("ByRef: %v\n" , p)
+
+	fmt.Println("********Struct Array*****") 	
+	ps := make([]PointZ , 5)
+	fmt.Println(ps)
+	for idx , val := range ps {
+		fmt.Println(idx ,  val)
+	}
+	fmt.Println("************Map Variation*************")
+	m := map[MapKeyStruct]int {
+		{ ID : "A0001", NAME: "APPLE", } : 500,
+	}
+
+	for k , v:=range m {
+		fmt.Println(k ,v)
+	}
+	
+	//K=uint V=[]string 		
+	mSlice := map[uint][]string {
+		1 : {"A" , "B" , "C"},
+		2 : {"D" , "E" , "F"},
+	}
+	fmt.Println(mSlice)
+
+	for k , v:=range mSlice {
+		fmt.Println(k , v)
+	}
+	mm := map[string]map[string]int {
+		"A0001" : {"Apple" : 300 },
+	}
+	fmt.Println(mm)
 }
