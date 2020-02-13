@@ -2,7 +2,15 @@ package main
 
 import(
 	"fmt"
+	"reflect"
 )
+
+type UseTagStruct struct {
+	Id    string   `Language ID`
+	Name  string   `Language Name`
+	Age   uint	   `Language Age` 
+	Address string `Language Address`
+} 
 
 type MapKeyStruct struct {
 	ID string
@@ -90,6 +98,16 @@ func main () {
 
 	for k , v:=range m {
 		fmt.Println(k ,v)
+		subk := reflect.TypeOf(k)
+		fmt.Println(subk.NumField())
+		for i := 0; i < subk.NumField(); i++ {
+			skf:=subk.Field(i)
+			fmt.Println(skf.Name)
+			// Key Param Judgement 
+			if skf := subk.Field(i) ; skf.Name == "ID" {
+			 	fmt.Println("This is ID Member")
+			}
+		}
 	}
 	
 	//K=uint V=[]string 		
@@ -106,4 +124,19 @@ func main () {
 		"A0001" : {"Apple" : 300 },
 	}
 	fmt.Println(mm)
+
+	t := UseTagStruct {
+		Id : "LANG01",
+		Name : "Golang",
+		Age  : 2009,
+		Address : "Golang@gmail.com",
+	}
+	fmt.Println(t)
+	typ := reflect.TypeOf(t)
+	fmt.Println(typ , typ.NumField()) // 4	
+	// Loop by Struc
+	for i := 0; i < typ.NumField(); i++ {
+		f := typ.Field(i)
+		fmt.Println(f.Name , f.Tag)
+	}
 }
