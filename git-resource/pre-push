@@ -1,0 +1,22 @@
+#!/bin/bash
+#*********************************************
+# Author  : Y.K
+# Summary : Control pushing hook script
+# Set Up 
+# ① : Putting this script on your 「.git/hook/」
+# ② : Custmize: Want to your restrict branch  
+#*********************************************
+# setting Your Restrict Branch
+reject_branch_lists=(
+					"master"
+					"git-test-restrict" # For Test Code
+)
+
+branch=$(git symbolic-ref HEAD | awk -F '[/]' '{print $3}')
+
+for reject in "${reject_branch_lists[@]}" ;do
+	if [[ ${reject} == ${branch}  ]];then
+		printf "[Restricted!!] You Don``t Push\033[33;31m[${branch}]\033[00mBranch\n"
+		exit 1 
+	fi
+done
