@@ -44,6 +44,7 @@
 
   ls -la | grep *.json
  -rw-r--r--   1 developer01  staff   215  2 17 11:31 package.json
+ 
  ```
 - jqueryのpackageをnpmでinstall
 
