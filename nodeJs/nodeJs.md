@@ -123,6 +123,63 @@
   Hello Node.js From Express
   ```
 
+### Expressのプロジェクトを利用しWebアプリ構築を行う
+
+
+- Expressの雛形プロジェクトの生成を行ってくれるCLI(`express-generator`)をインストールし、
+  express コマンドでプロジェクトを作成する
+
+  ```sh
+  $ npm install -g express-generator
+  $ express express-web-app
+  ```
+  <table>
+    <tr>
+      <th>Dir Name</th>
+      <th>Roles</th>
+    </tr>
+    <tr>
+      <td>public</td>
+      <td>css,imgなどの静的なファイルを配置するディレクトリ</td>
+    </tr>
+
+    <tr>
+      <td>routes</td>
+      <td>コンテキストのPATHを元にRouterとして機能するディレクトリ</td>
+    </tr>
+
+    <tr>
+      <td>views</td>
+      <td>Viewを担うディレクトリ</td>
+    </tr>
+
+
+  </table>
+
+  プロジェクトの構成についてtreeコマンドで確認する。
+
+  ```sh
+  $ cd express-web-app
+  $ tree
+  .
+  ├── app.js
+  ├── bin
+  │   └── www
+  ├── package.json
+  ├── public
+  │   ├── images
+  │   ├── javascripts
+  │   └── stylesheets
+  │       └── style.css
+  ├── routes
+  │   ├── index.js
+  │   └── users.js
+  └── views
+      ├── error.jade
+      ├── index.jade
+      └── layout.jade
+  ```
+
 ### GETパラメーダを受け取るコード(Expressを使用しない例)
 
 - Server側のソース
