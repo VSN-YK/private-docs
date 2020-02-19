@@ -123,8 +123,7 @@
   Hello Node.js From Express
   ```
 
-### Expressのプロジェクトを利用しWebアプリ構築を行う
-
+### Expressのプロジェクトを利用しテンプレートWebアプリの動作を検証する
 
 - Expressの雛形プロジェクトの生成を行ってくれるCLI(`express-generator`)をインストールし、
   express コマンドでプロジェクトを作成する
@@ -179,6 +178,67 @@
       ├── index.jade
       └── layout.jade
   ```
+  package-lock.jsonにexpress-web-app内で使用していパッケージとの依存関係を記述
+
+  ```sh
+  $ npm install -d
+  ```
+  ちなみにpackage-lock.jsonには以下のように各パッケージとの依存関係が既述されている
+  ```sh
+  # acorn パッケージとの依存関係
+  $ cat  package-lock.json | jq .dependencies.acorn
+  {
+    "version": "2.7.0",
+    "resolved": "https://registry.npmjs.org/acorn/-/acorn-2.7.0.tgz",
+    "integrity": "sha1-q259nYhqrKiwhbwzEreaGYQz8Oc="
+  }
+  ```
+  appの起動を行う
+
+  ```sh
+  $ npm start
+
+  > express-web-app@0.0.0 start /Users/hacknatural/nodeJS/express-web-app
+  > node ./bin/www  
+  ```
+  別ターミナルからcurlコマンドを実行し、WebServerとの接続を確かめる
+
+  ```sh
+  $ curl -sSf http://localhost:3000/
+  <!DOCTYPE html><html><head><title>Express</title><link rel="stylesheet" href="/stylesheets/style.css"></head><body><h1>Express</h1><p>Welcome to Express</p></body></html>
+  ```
+
+### Expressで簡易的なWebAppを作成する
+
+今回作成を行うWebアプリはテキストフィールドに入力されたValueをPOSTで送信し
+その内容をConfirmとして表示する簡易的なアプリである。
+
+**アプリの構成**
+
+```sh
+.
+├── app.js
+├── bin
+│   └── www
+├── package.json
+├── public
+│   ├── images
+│   ├── javascripts
+│   └── stylesheets
+│       └── style.css
+├── routes
+│   ├── index.js
+│   ├── users.js
+│   └── wellcome.js
+└── views
+    ├── confirm.jade
+    ├── error.jade
+    ├── index.jade
+    ├── layout.jade
+    └── wellcome.jade
+
+7 directories, 12 files
+```
 
 ### GETパラメーダを受け取るコード(Expressを使用しない例)
 
@@ -219,4 +279,5 @@
   href: '/node-test?name=nodeJS'
   }
   ```
-  For Test
+
+- [参考文献](https://qiita.com/Coolucky/items/4b35622d32d6eae2ebc4)
