@@ -239,6 +239,33 @@
 
 7 directories, 12 files
 ```
+**test.appのルーティングの設定を行うめアプリケーションのインスタンスを作成する**
+
+```js
+var app = require('./routes/test');
+console.log(app)
+```
+appのインスタンス情報を出力したもの
+```
+[Function: router] {
+  params: {},
+  _params: [],
+  caseSensitive: undefined,
+  mergeParams: undefined,
+  strict: undefined,
+  stack: [
+    Layer {
+      handle: [Function: bound dispatch],
+      name: 'bound dispatch',
+      params: undefined,
+      path: undefined,
+      keys: [],
+      regexp: /^\/?$/i,
+      route: [Route]
+    }
+  ]
+}
+```
 
 ### GETパラメーダを受け取るコード(Expressを使用しない例)
 
@@ -279,5 +306,4 @@
   href: '/node-test?name=nodeJS'
   }
   ```
-
 - [参考文献](https://qiita.com/Coolucky/items/4b35622d32d6eae2ebc4)
