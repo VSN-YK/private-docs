@@ -54,43 +54,60 @@ Promise オブジェクトは非同期処理の最終的な完了処理（もし
 この例は先ほどの同様の`setTimeout(function() , milis)`を使用してPromiseの利点について解説いたします。
 
 ```js
-const promiss = new Promise((resolve , reject) => {
-    console.log("[delegateProcessFunc]=" + resolve + "\n[ErrorHundleFunc]="+ reject)
-    setTimeout(() => {
-        console.log("Like [Sync Process]  with Promiss");
-        resolve();
-    },3000);
+function asyncronusFunction(num){
+    //Promise オブジェクトのリターンを行う
+    return new Promise(function(resolve ,reject) {
+        var sw = Math.floor(Math.random() * Math.floor(num));
+        setTimeout(function() {
+            console.log(sw);
+            if (sw == 1 || sw == 2) {
+                resolve('Succees Promise Process');
+            }else{
+                reject('Faild');
+
+            }
+        },1000);
+    });
+}
+
+asyncronusFunction(3).then(function (value) {
+    console.log(value);
+}).catch(function (error) {
+    console.log(error);
 });
-/****************debug print *****************/
-console.log(promiss);
-console.log("Promise Type=" + typeof(promiss));
-
-if (promiss == null){return;}
-for(let v in promiss){console.log(v);}
-/**********************************************/
-promiss.then(() => console.log('Done' + promiss));
-
 ```
 
 処理の内容を解説(関係のある処理だけを抜粋してます)
 
-- [ ] promise オブジェクトの作成(3sスリープした後、コンソールにメッセージを出力するコールバック)を行う
+- [ ] promise オブジェクトの作成(1sスリープした後、コンソールにメッセージを出力するコールバック)を行う
 
   ```js
-  const promiss = new Promise((resolve , reject) => {
-      console.log("[delegateProcessFunc]=" + resolve + "\n[ErrorHundleFunc]="+ reject)
-      setTimeout(() => {
-          console.log("Like [Sync Process]  with Promiss");
-          resolve();
-      },3000);
+  return new Promise(function(resolve ,reject) {
+      var sw = Math.floor(Math.random() * Math.floor(num));
+      setTimeout(function() {
+          console.log(sw);
+          if (sw == 1 || sw == 2) {
+              //Return Expect of Value
+              resolve('Succees Promise Process');
+          }else{
+              //coused Error
+              reject('Faild');
+
+          }
+      },1000);
   });
+
   ```
 - [ ] promiseオブジェクトの結果を受け取り次のイベントを始動
-
+  numの値が1or2の場合はresolve()を返し、0,3の場合はreject()を返す仕様です。
   ```js
-  promiss.then(() => console.log('Done' + promiss));  
-  ```
+  asyncronusFunction(3).then(function (value) {
+      console.log(value);
+  }).catch(function (error) {
+      console.log(error);
+  });
 
+  ```
 
 **※ 定義や性格については後ほど述べます。**
 
@@ -120,9 +137,12 @@ Console
 > "Completed Promise Process"
 ```
 
-ですので `reject`はその逆でエラーハンドリングを行うためのものと捉えていただければここでは結構です。
+ですので `reject`はその逆でエラーハンドリングを行うための制御メソッドになります。`reject()`を発動させることで `new Error()`を生成できます。
 
-ここでは扱いません
+```js
+reject('Faild');
+```
+つまり`catch((e =>)`できるということになります。
 
 #### Promiseが保証する事項
 
