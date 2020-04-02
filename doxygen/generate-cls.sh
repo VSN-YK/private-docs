@@ -24,13 +24,18 @@ done
 
 shift $((OPTIND - 1))
 
-if [[ ! $( which dot && which doxygen ) ]]; then
+if [[ "$(uname)" = "Darwin" ]]; then
+    if [[ ! $( which dot && which doxygen ) ]]; then
         echo "Invalid"
         exit 1
+    fi
+else
+    echo "Not Supported Your OS"
+    exit 1
 fi
 
 if [[ -z ${PROJECT_DIR_PATH} ]]; then
-    echo [ERROR] "You Must Set Your Project Dir"
+    echo "[ERROR] You Must Set Your Project Dir"
     exit 1
 fi
 
