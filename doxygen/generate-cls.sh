@@ -26,7 +26,7 @@ shift $((OPTIND - 1))
 
 if [[ ! $( which dot && which doxygen ) ]]; then
         echo "Invalid"
-        return 1
+        exit 1
 fi
 
 if [[ -z ${PROJECT_DIR_PATH} ]]; then
@@ -40,7 +40,6 @@ cd ${PROJECT_DIR_PATH}
 #generate Doxyfile
 if [[ -f ./DoxyFile ]]; then
     rm Doxyfile
-    #create_custom_doxy_template
 fi
 
 doxygen -g
