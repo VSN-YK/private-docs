@@ -157,4 +157,3 @@ reject('Faild');
 - pending: 初期状態
 - fulfilled: 処理が成功して完了
 - rejected: 処理が失敗
-
