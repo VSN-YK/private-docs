@@ -7,6 +7,7 @@ import (
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"log"
 	"os"
+	"time"
 )
 
 // Set Up in Colog Condition
@@ -18,6 +19,18 @@ func setLogCondition() {
 		Flag:   log.Ldate | log.Ltime | log.Lshortfile,
 	})
 	colog.Register()
+}
+
+type User struct {
+	Id       string `gorm:"primary_key"`
+	Name     string
+	Password string
+	Email    string
+}
+
+type ManageSession struct {
+	SessionId string `gorm:"primary_key"`
+	SavedDate time.Time
 }
 
 // difinate db recode type
@@ -61,6 +74,24 @@ func main() {
 	defer db.Close()
 	setLogCondition()
 	log.Printf("debug: Debug")
+
+	log.Printf("info: Create User Table")
+	db.Set("gorm:table_options", "ENGINE=InnoDB")
+	db.AutoMigrate(&User{})
+
+	log.Printf("info: Create Session Table")
+	db.Set("gorm:table_options", "ENGINE=InnoDB")
+	db.AutoMigrate(&ManageSession{})
+
+	insert_user_rcd := User{}
+	log.Printf("debug:%T", insert_user_rcd.Name)
+	insert_user_rcd.Id = "U_001"
+	insert_user_rcd.Name = "Golang"
+	insert_user_rcd.Password = "Golang"
+	insert_user_rcd.Email = "golang@gmail.com"
+
+	db.Table("USERS").Create(&insert_user_rcd)
+
 	if InsertCheck(db, "L003") {
 		fmt.Println("*********Insert Data********")
 		insert_rcd := ResultRecord{}
