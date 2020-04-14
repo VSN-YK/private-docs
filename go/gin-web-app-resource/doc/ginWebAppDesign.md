@@ -13,9 +13,13 @@ localhost:8089/にアクセスを行うとログイン画面(login.html)に遷�
 注釈 セッション管理の詳細は※1を参照する。
 ```
 
+#### アプリケーションの概要
+![image](https://user-images.githubusercontent.com/60165356/79192989-b4995b00-7e64-11ea-915e-66d44c1014c3.png)
+
 #### ※1 セッション管理
 
 - [ ] **1.構成要素について**
+
 <table>
   <tr>
     <th colspan="2"><center>構成要素</center></th>
@@ -25,7 +29,7 @@ localhost:8089/にアクセスを行うとログイン画面(login.html)に遷�
     <td>github.com/gin-contrib/sessions<br>github.com/gin-contrib/sessions/cookie</td>
   </tr>
   <tr>
-    <th>セッション管理</th>
+    <th>セッション管理</th>  
     <td>cookie</td>
   </tr>
 </table>
