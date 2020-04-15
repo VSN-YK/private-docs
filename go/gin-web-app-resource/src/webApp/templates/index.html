@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8">
+    <style type="text/css" media="screen">
+      @import url("/assets/css/index.css");
+      @import url("/assets/css/common.css");
+    </style>
+    <title>{{.title}}</title>
+  </head>
+
+  <body>
+      <div class="form-wrapper">
+    <h1>Sign In</h1>
+  <form action="/wellcome" method="POST">
+    <div class="form-item">
+      <input type="text" name="loginId" required="required" placeholder="Login Id"></input>
+    </div>
+    <div class="form-item">
+      <label for="password"></label>
+      <input type="password" name="password" required="required" placeholder="Password"></input>
+    </div>
+    <div class="button-panel">
+      <input type="submit" class="button" title="Sign In" value="Sign In"></input>
+      <input type="reset" class="button" value="Reset"></input>
+    </div>
+  </form>
+
+  <form action="/registerAccount" name="regForm" method="POST">
+     <p><a href="javascript:regForm.submit()">Create an account</a></p>
+  </form>
+</div>
+  <body>
+<html>
