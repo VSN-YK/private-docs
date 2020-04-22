@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentScriptType="application/ecmascript" contentStyleType="text/css" height="274px" preserveAspectRatio="none" style="width:2363px;height:274px;" version="1.1" viewBox="0 0 2363 274" width="2363px" zoomAndPan="magnify">
+    <defs />
+    <g><text fill="#454645" font-family="monaco" font-size="18" lengthAdjust="spacingAndGlyphs" textLength="198" x="1088.5" y="19.5029">Web API DDD Design</text>
+        <!--MD5=[ff2db746684f7232c3c0aa54859c9988]
+cluster /domain-->
+        <polygon fill="#FFFFFF" points="22,48.0029,84,48.0029,91,72.6719,1607,72.6719,1607,262.0029,22,262.0029,22,48.0029" style="stroke: #2D74BA; stroke-width: 1.5;" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="22" x2="91" y1="72.6719" y2="72.6719" /><text fill="#454645" font-family="monaco" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="56" x="26" y="65.1719">/domain</text>
+        <!--MD5=[05074e77d456334b56fd3c32133e765a]
+cluster /repositry-->
+        <polygon fill="#FFFFFF" points="1013,93.0029,1099,93.0029,1106,117.6719,1583,117.6719,1583,238.0029,1013,238.0029,1013,93.0029" style="stroke: #2D74BA; stroke-width: 1.5;" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="1013" x2="1106" y1="117.6719" y2="117.6719" /><text fill="#454645" font-family="monaco" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="80" x="1017" y="110.1719">/repositry</text>
+        <!--MD5=[a5b0182da8fd356d538d2a230fd71400]
+cluster /service-->
+        <polygon fill="#FFFFFF" points="419,107.5029,489,107.5029,496,132.1719,989,132.1719,989,223.5029,419,223.5029,419,107.5029" style="stroke: #2D74BA; stroke-width: 1.5;" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="419" x2="496" y1="132.1719" y2="132.1719" /><text fill="#454645" font-family="monaco" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="64" x="423" y="124.6719">/service</text>
+        <!--MD5=[afb02dd8a47e5f00e57b9ba04142c44d]
+cluster /infrastructure-->
+        <polygon fill="#FFFFFF" points="1631,85.5029,1757,85.5029,1764,110.1719,2341,110.1719,2341,245.5029,1631,245.5029,1631,85.5029" style="stroke: #2D74BA; stroke-width: 1.5;" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="1631" x2="1764" y1="110.1719" y2="110.1719" /><text fill="#454645" font-family="monaco" font-size="14" font-weight="bold" lengthAdjust="spacingAndGlyphs" textLength="120" x="1635" y="102.6719">/infrastructure</text>
+        <!--MD5=[1a8182cd90115ebb74ce27b4bdb88709]
+class LanguageModel-->
+        <rect fill="#FFFFFF" height="106.6738" id="LanguageModel" style="stroke: #2D74BA; stroke-width: 1.5;" width="362" x="38" y="122.5029" />
+        <ellipse cx="169.25" cy="138.5029" fill="#FFFFFF" rx="11" ry="11" style="stroke: #2D74BA; stroke-width: 1.0;" />
+        <path d="M171.7231,144.646 Q171.1421,144.9448 170.5029,145.0942 Q169.8638,145.2437 169.1582,145.2437 Q166.6514,145.2437 165.3315,143.5918 Q164.0117,141.9399 164.0117,138.8188 Q164.0117,135.6895 165.3315,134.0376 Q166.6514,132.3857 169.1582,132.3857 Q169.8638,132.3857 170.5112,132.5352 Q171.1587,132.6846 171.7231,132.9834 L171.7231,135.7061 Q171.0923,135.125 170.4988,134.8552 Q169.9053,134.5854 169.2744,134.5854 Q167.9297,134.5854 167.2449,135.6521 Q166.5601,136.7188 166.5601,138.8188 Q166.5601,140.9106 167.2449,141.9773 Q167.9297,143.0439 169.2744,143.0439 Q169.9053,143.0439 170.4988,142.7742 Q171.0923,142.5044 171.7231,141.9233 Z " /><text fill="#454645" font-family="monaco" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="91" x="189.75" y="143.5039">LanguageModel</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="39" x2="399" y1="154.5029" y2="154.5029" />
+        <rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="46" y="162.5029" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="63" x="58" y="170.4214">id string</text>
+        <rect fill="none" height="6" style="stroke: #C82930; stroke-width: 1.0;" width="6" x="46" y="177.1714" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="77" x="58" y="185.0898">name string</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.0;" x1="39" x2="399" y1="191.8398" y2="191.8398" />
+        <ellipse cx="49" cy="202.8398" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="312" x="58" y="207.7583">func ResultLanguageRecord (Id string)　string</text>
+        <ellipse cx="49" cy="217.5083" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="336" x="58" y="222.4268">func ResultLanguageRecords (Id string) [] string</text>
+        <!--MD5=[1f4b22eed0564044cf3d92bbf27ad29c]
+class LanguageRepository-->
+        <rect fill="#FFFFFF" height="92.0054" id="LanguageRepository" style="stroke: #2D74BA; stroke-width: 1.5;" width="537" x="1029.5" y="130.0029" />
+        <ellipse cx="1230.75" cy="146.0029" fill="#FFFFFF" rx="11" ry="11" style="stroke: #2D74BA; stroke-width: 1.0;" />
+        <path d="M1227.1777,142.2681 L1227.1777,140.1099 L1234.5571,140.1099 L1234.5571,142.2681 L1232.0918,142.2681 L1232.0918,150.3447 L1234.5571,150.3447 L1234.5571,152.5029 L1227.1777,152.5029 L1227.1777,150.3447 L1229.6431,150.3447 L1229.6431,142.2681 Z " /><text fill="#454645" font-family="monaco" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="126" x="1251.25" y="151.0039">LanguageRepository</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="1030.5" x2="1565.5" y1="162.0029" y2="162.0029" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="1030.5" x2="1565.5" y1="170.0029" y2="170.0029" />
+        <ellipse cx="1040.5" cy="181.0029" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="511" x="1049.5" y="185.9214">GetByLanguageId (db *gorm.DB , Id string) (*domain.LanguageModel , error)</text>
+        <ellipse cx="1040.5" cy="195.6714" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="448" x="1049.5" y="200.5898">GetByLanguageIds (db *gorm.DB) ([]*domain.LanguageModel , error)</text>
+        <ellipse cx="1040.5" cy="210.3398" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="462" x="1049.5" y="215.2583">CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error</text>
+        <!--MD5=[58d063012b8b3598e6e626f91b91a54a]
+class LanguageService-->
+        <rect fill="#FFFFFF" height="62.6685" id="LanguageService" style="stroke: #2D74BA; stroke-width: 1.5;" width="537" x="435.5" y="144.5029" />
+        <ellipse cx="647.25" cy="160.5029" fill="#FFFFFF" rx="11" ry="11" style="stroke: #2D74BA; stroke-width: 1.0;" />
+        <path d="M643.6777,156.7681 L643.6777,154.6099 L651.0571,154.6099 L651.0571,156.7681 L648.5918,156.7681 L648.5918,164.8447 L651.0571,164.8447 L651.0571,167.0029 L643.6777,167.0029 L643.6777,164.8447 L646.1431,164.8447 L646.1431,156.7681 Z " /><text fill="#454645" font-family="monaco" font-size="12" font-style="italic" lengthAdjust="spacingAndGlyphs" textLength="105" x="667.75" y="165.5039">LanguageService</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="436.5" x2="971.5" y1="176.5029" y2="176.5029" />
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="436.5" x2="971.5" y1="184.5029" y2="184.5029" />
+        <ellipse cx="446.5" cy="195.5029" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="511" x="455.5" y="200.4214">OperateLanguage (db *gorm.DB , Id string Name String, Mode int) *Language</text>
+        <!--MD5=[2e7c584fb54a59ec7e1f5073f8ea812c]
+class LanguageDTO-->
+        <rect fill="#FFFFFF" height="106.6738" id="LanguageDTO" style="stroke: #2D74BA; stroke-width: 1.5;" width="677" x="1647.5" y="122.5029" />
+        <ellipse cx="1943.25" cy="138.5029" fill="#FFFFFF" rx="11" ry="11" style="stroke: #2D74BA; stroke-width: 1.0;" />
+        <path d="M1945.7231,144.646 Q1945.1421,144.9448 1944.5029,145.0942 Q1943.8638,145.2437 1943.1582,145.2437 Q1940.6514,145.2437 1939.3315,143.5918 Q1938.0117,141.9399 1938.0117,138.8188 Q1938.0117,135.6895 1939.3315,134.0376 Q1940.6514,132.3857 1943.1582,132.3857 Q1943.8638,132.3857 1944.5112,132.5352 Q1945.1587,132.6846 1945.7231,132.9834 L1945.7231,135.7061 Q1945.0923,135.125 1944.4988,134.8552 Q1943.9053,134.5854 1943.2744,134.5854 Q1941.9297,134.5854 1941.2449,135.6521 Q1940.5601,136.7188 1940.5601,138.8188 Q1940.5601,140.9106 1941.2449,141.9773 Q1941.9297,143.0439 1943.2744,143.0439 Q1943.9053,143.0439 1944.4988,142.7742 Q1945.0923,142.5044 1945.7231,141.9233 Z " /><text fill="#454645" font-family="monaco" font-size="12" lengthAdjust="spacingAndGlyphs" textLength="77" x="1963.75" y="143.5039">LanguageDTO</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.5;" x1="1648.5" x2="2323.5" y1="154.5029" y2="154.5029" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="140" x="1653.5" y="170.4214">LanguageDTO : struct</text>
+        <line style="stroke: #2D74BA; stroke-width: 1.0;" x1="1648.5" x2="2323.5" y1="177.1714" y2="177.1714" />
+        <ellipse cx="1658.5" cy="188.1714" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="616" x="1667.5" y="193.0898">func (lang *LanguageModel) GetByLanguageId (db *gorm.DB, Id string) (*LanguageDTO error)</text>
+        <ellipse cx="1658.5" cy="202.8398" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="574" x="1667.5" y="207.7583">func (lang *LanguageModel) GetByLanguageIds (db *gorm.DB) (*[]LanguageDTO , error)</text>
+        <ellipse cx="1658.5" cy="217.5083" fill="#FFFFFF" rx="3" ry="3" style="stroke: #038048; stroke-width: 1.0;" /><text fill="#454645" font-family="monaco" font-size="11" lengthAdjust="spacingAndGlyphs" textLength="651" x="1667.5" y="222.4268">func (lang *LanguageModel) CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error</text>
+        <!--MD5=[028e861f6d5429b7c3d03c8153b5d72a]
+@startuml
+
+skinparam shadowing false
+skinparam DefaultFontName monaco
+skinparam ArrowColor #00b2e2
+skinparam DefaultFontColor #454645
+
+skinparam ActivityBorderColor #2D74BA
+skinparam ActivityDiamondBorderColor #2D74BA
+skinparam ActorBorderColor #2D74BA
+skinparam AgentBorderColor #2D74BA
+skinparam ArtifactBorderColor #2D74BA
+skinparam CardBorderColor #2D74BA
+skinparam ClassBorderColor #2D74BA
+skinparam CloudBorderColor #2D74BA
+skinparam CollectionsBorderColor #2D74BA
+skinparam ComponentBorderColor #2D74BA
+skinparam ControlBorderColor #2D74BA
+skinparam BoundaryBorderColor #2D74BA
+skinparam DatabaseBorderColor #2D74BA
+skinparam EntityBorderColor #2D74BA
+skinparam FileBorderColor #2D74BA
+skinparam FolderBorderColor #2D74BA
+skinparam FrameBorderColor #2D74BA
+skinparam InterfaceBorderColor #2D74BA
+skinparam LegendBorderColor #2D74BA
+skinparam NodeBorderColor #2D74BA
+skinparam NoteBorderColor #2D74BA
+skinparam ObjectBorderColor #2D74BA
+skinparam PackageBorderColor #2D74BA
+skinparam PageBorderColor #2D74BA
+skinparam ParticipantBorderColor #2D74BA
+skinparam PartitionBorderColor #2D74BA
+skinparam QueueBorderColor #2D74BA
+skinparam RectangleBorderColor #2D74BA
+skinparam SequenceBoxBorderColor #2D74BA
+skinparam SequenceDividerBorderColor #2D74BA
+skinparam SequenceGroupBorderColor #2D74BA
+skinparam SequenceLifeLineBorderColor #2D74BA
+skinparam SequenceReferenceBorderColor #2D74BA
+skinparam StackBorderColor #2D74BA
+skinparam StateBorderColor #2D74BA
+skinparam StereotypeABorderColor #2D74BA
+skinparam StereotypeCBorderColor #2D74BA
+skinparam StereotypeEBorderColor #2D74BA
+skinparam StereotypeIBorderColor #2D74BA
+skinparam StereotypeNBorderColor #2D74BA
+skinparam StorageBorderColor #2D74BA
+skinparam SwimlaneBorderColor #2D74BA
+skinparam UsecaseBorderColor #2D74BA
+
+skinparam ActivityBackgroundColor #FFFFFF
+skinparam ActivityDiamondBackgroundColor #FFFFFF
+skinparam ActorBackgroundColor #FFFFFF
+skinparam AgentBackgroundColor #FFFFFF
+skinparam ArtifactBackgroundColor #FFFFFF
+skinparam BackgroundColor #FFFFFF
+skinparam BoundaryBackgroundColor #FFFFFF
+skinparam CardBackgroundColor #FFFFFF
+skinparam ClassBackgroundColor #FFFFFF
+skinparam ClassHeaderBackgroundColor #FFFFFF
+skinparam CloudBackgroundColor #FFFFFF
+skinparam CollectionsBackgroundColor #FFFFFF
+skinparam ComponentBackgroundColor #FFFFFF
+skinparam BoundaryBackgroundColor #FFFFFF
+skinparam ControlBackgroundColor #FFFFFF
+skinparam DatabaseBackgroundColor #FFFFFF
+skinparam EntityBackgroundColor #FFFFFF
+skinparam FileBackgroundColor #FFFFFF
+skinparam FolderBackgroundColor #FFFFFF
+skinparam FrameBackgroundColor #FFFFFF
+skinparam IconPackageBackgroundColor #FFFFFF
+skinparam IconPrivateBackgroundColor #FFFFFF
+skinparam IconProtectedBackgroundColor #FFFFFF
+skinparam IconPublicBackgroundColor #FFFFFF
+skinparam InterfaceBackgroundColor #FFFFFF
+skinparam LegendBackgroundColor #FFFFFF
+skinparam NodeBackgroundColor #FFFFFF
+skinparam NoteBackgroundColor #FFFFFF
+skinparam ObjectBackgroundColor #FFFFFF
+skinparam PackageBackgroundColor #FFFFFF
+skinparam ParticipantBackgroundColor #FFFFFF
+skinparam PartitionBackgroundColor #FFFFFF
+skinparam QueueBackgroundColor #FFFFFF
+skinparam RectangleBackgroundColor #FFFFFF
+skinparam SequenceBoxBackgroundColor #FFFFFF
+skinparam SequenceDividerBackgroundColor #FFFFFF
+skinparam SequenceGroupBackgroundColor #FFFFFF
+skinparam SequenceGroupBodyBackgroundColor #FFFFFF
+skinparam SequenceLifeLineBackgroundColor #FFFFFF
+skinparam SequenceReferenceBackgroundColor #FFFFFF
+skinparam SequenceReferenceHeaderBackgroundColor #FFFFFF
+skinparam StackBackgroundColor #FFFFFF
+skinparam StateBackgroundColor #FFFFFF
+skinparam StereotypeABackgroundColor #FFFFFF
+skinparam StereotypeCBackgroundColor #FFFFFF
+skinparam StereotypeEBackgroundColor #FFFFFF
+skinparam StereotypeIBackgroundColor #FFFFFF
+skinparam StereotypeNBackgroundColor #FFFFFF
+skinparam StorageBackgroundColor #FFFFFF
+skinparam TitleBackgroundColor #FFFFFF
+skinparam UsecaseBackgroundColor #FFFFFF
+
+skinparam ActivityStartColor #454645
+skinparam ActivityEndColor #454645
+skinparam StateStartColor #454645
+skinparam StateEndColor #454645
+title Web API DDD Design
+package /domain {
+  class LanguageModel {
+    - id string
+    - name string
+  - - -
+  + func ResultLanguageRecord (Id string)　string
+  + func ResultLanguageRecords (Id string) [] string
+  }
+    package /repositry {
+      interface LanguageRepository {
+        +  GetByLanguageId (db *gorm.DB , Id string) (*domain.LanguageModel , error)
+        +  GetByLanguageIds (db *gorm.DB) ([]*domain.LanguageModel , error)
+        +  CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error
+      }
+    }
+    package /service {
+      interface LanguageService {
+        +  OperateLanguage (db *gorm.DB , Id string Name String, Mode int) *Language
+      }
+    }
+}
+package /infrastructure {
+  class LanguageDTO {
+    LanguageDTO : struct
+    - - -
+    + func (lang *LanguageModel) GetByLanguageId (db *gorm.DB, Id string) (*LanguageDTO error)
+    + func (lang *LanguageModel) GetByLanguageIds (db *gorm.DB) (*[]LanguageDTO , error)
+    + func (lang *LanguageModel) CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error
+  }
+}
+
+@enduml
+
+PlantUML version 1.2020.07(Sun Apr 19 20:42:40 JST 2020)
+(GPL source distribution)
+Java Runtime: Java(TM) SE Runtime Environment
+JVM: Java HotSpot(TM) 64-Bit Server VM
+Java Version: 13.0.2+8
+Operating System: Mac OS X
+Default Encoding: UTF-8
+Language: en
+Country: JP
+-->
+    </g>
+</svg>

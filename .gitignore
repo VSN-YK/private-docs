@@ -2,3 +2,4 @@ node_modules/
 package*.json
 go.mod
 go.sum
+config.txt
