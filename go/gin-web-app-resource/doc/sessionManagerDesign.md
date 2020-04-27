@@ -116,6 +116,11 @@
 
 	[HTTPリクエストの中で記述されているリクエストヘッダーの一行目の部分を示し、HTTPリクエスト全体の概要が大まかに記述されております。](https://wa3.i-3-i.info/word1843.html)
 
+	その後はバリデーション処理やパース処理を行い問題がなければCookie構造体配列にCookie情報を詰めてリターンしています。
+
+	<details>
+	<summary>func readCookies </summary>
+
 	```go
 	func readCookies(h Header, filter string) []*Cookie {
 	lines := h["Cookie"]
@@ -158,6 +163,7 @@
 	return cookies
 }
 ```
+</details>
 
 	```go
 	func (m *Manager) New(r.*http.Request, cookieName string) (*Session , error) {
@@ -166,6 +172,7 @@
 			return nil, errors.New("Session Id Was AllReady Issued")
 		}
 
+    // このセッション初期化関数はsession.goで実装する
 		session := NewSession(m, cookieName)
 		session.Id = m.PayLoadNewSessionId()
 		session.Request = r
@@ -173,3 +180,8 @@
 		return session, nil
 	}
 	```
+- [ ] セッションの保存を行う
+
+  ```go
+
+  ```
