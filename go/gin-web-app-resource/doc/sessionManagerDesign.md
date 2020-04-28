@@ -161,7 +161,7 @@
 		}
 	}
 	return cookies
-}
+ }
 ```
 </details>
 
@@ -179,9 +179,19 @@
 
 		return session, nil
 	}
+
 	```
-- [ ] セッションの保存を行う
-
+- [ ] クライアントとサーバ側にセッションの保存を行う
+  
   ```go
+  func (m *Manager) Save(r *http.Request, w http.ResponseWriter, session *Session) err {
+    m.database[session.Id] = session
 
+    c := &http.Cookie{
+      Name: session.Name(),
+      Value: session.Id,
+    }
+    http.SetCookie(session.writer, c)
+    return nil
+  }
   ```
