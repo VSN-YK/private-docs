@@ -78,7 +78,7 @@
 		return nil, ErrNoCookie
 		}
 	```
-	先ほどの`readCookies関数`の話に戻します。この関数の第一引数として渡している`r.Header`という値に注目します。これはリクエストヘッダと呼ばれるHTTP通信の際に付与されるヘッダーであり
+	先ほどの[readCookies関数](https://github.com/golang/go/blob/master/src/net/http/cookie.go#L237)の話に戻します。この関数の第一引数として渡している`r.Header`という値に注目します。これはリクエストヘッダと呼ばれるHTTP通信の際に付与されるヘッダーであり
 	通信の大まかな要求が記述されているものとして捉えてください。
 
 	では関数内部の話に戻します。
@@ -90,53 +90,6 @@
 	[HTTPリクエストの中で記述されているリクエストヘッダーの一行目の部分を示し、HTTPリクエスト全体の概要が大まかに記述されております。](https://wa3.i-3-i.info/word1843.html)
 
 	その後はバリデーション処理やパース処理を行い問題がなければCookie構造体配列にCookie情報を詰めてリターンしています。
-
-	<details>
-	<summary>func readCookies </summary>
-
-	```go
-	func readCookies(h Header, filter string) []*Cookie {
-	lines := h["Cookie"]
-	if len(lines) == 0 {
-		return []*Cookie{}
-	}
-
-	cookies := make([]*Cookie, 0, len(lines)+strings.Count(lines[0], ";"))
-	for _, line := range lines {
-		line = strings.TrimSpace(line)
-
-		var part string
-		for len(line) > 0 { // continue since we have rest
-			if splitIndex := strings.Index(line, ";"); splitIndex > 0 {
-				part, line = line[:splitIndex], line[splitIndex+1:]
-			} else {
-				part, line = line, ""
-			}
-			part = strings.TrimSpace(part)
-			if len(part) == 0 {
-				continue
-			}
-			name, val := part, ""
-			if j := strings.Index(part, "="); j >= 0 {
-				name, val = name[:j], name[j+1:]
-			}
-			if !isCookieNameValid(name) {
-				continue
-			}
-			if filter != "" && filter != name {
-				continue
-			}
-			val, ok := parseCookieValue(val, true)
-			if !ok {
-				continue
-			}
-			cookies = append(cookies, &Cookie{Name: name, Value: val})
-		}
-	}
-	return cookies
- }
-```
-</details>
 
 	```go
 	func (m *Manager) New(r.*http.Request, cookieName string) (*Session , error) {
