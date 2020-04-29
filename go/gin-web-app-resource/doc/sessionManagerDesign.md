@@ -14,33 +14,6 @@
 では早速 <span style="color: red; ">manager.go</span>から実装していきます。
 今回使用するパッケージについては以下とします。
 
-<table>
-	<tr>
-		<th>パッケージ名</th>
-		<th>機能概要</th>
-	</tr>
-	<tr>
-		<td>crypto/rand</td>
-		<td>疑似乱数生成を行う</td>
-	</tr>
-	<tr>
-		<td>encoding/base64</td>
-		<td>base64でエンコーディングを行う</td>
-	</tr>
-	<tr>
-		<td>errors</td>
-		<td>エラー管理を行う</td>
-	</tr>
-	<tr>
-		<td>io</td>
-		<td>入出力処理を行う</td>
-	</tr>
-	<tr>
-		<td>net/http</td>
-		<td>HTTPを扱うパッケージで、HTTPクライアントとHTTPサーバーを実装するために必要な機能が提供されている。</td>
-	</tr>
-</tabel>
-
 - [ ] セッションマネージャ構造体の定義を行う
 
 	Map型で定義を行っている理由についてはまずキーとして一意となるセッションIDを持たせ、
@@ -182,7 +155,7 @@
 
 	```
 - [ ] クライアントとサーバ側にセッションの保存を行う
-  
+
   ```go
   func (m *Manager) Save(r *http.Request, w http.ResponseWriter, session *Session) err {
     m.database[session.Id] = session
@@ -194,4 +167,73 @@
     http.SetCookie(session.writer, c)
     return nil
   }
+
   ```
+- [ ] 既存セッションのチェックを行う汎用メソッド
+
+  ```go
+  func (m *Manager) IsExists(sessionId string) bool {
+    _,  s := m.database[sessionId]  
+    return s
+  }
+  ```
+- [ ] 既存セッション情報の取得を行う
+
+  クライアント側のセッション情報と突き合わせを行います。
+  クライアント側で管理しているクッキー情報を取得し、その中からセッションIDの抽出を行います。
+
+  次に取得したセッションIDをキーとしてサーバ側で保有しているセッション情報であるかの突き合わせを行います。
+  なければ存在しないセッションIdであることをエラーとしてユーザに促します。
+  突き合わせの結果存在するセッション情報であればその値(session構造体)をinterface{}から取り出します。
+
+  ```go
+  func (m *Manager) GetSessionInfo(r *http.Request , cookieName string) {
+    cookie , err := r.Cookie(cookieName)
+    if err != nil {
+      return nil, err
+    }
+    sessionId := cookie.Value
+    buffer, exists := m.database[sessionId]
+    if ! exists {
+      return nil, errors.New("Invalid Session Id")
+    }
+
+    session := buffer.(*Session)
+    session.request = r
+    return session , nil
+  }
+  ```
+- [ ] セッショ情報の破棄を行う
+
+  ```go
+  func (m *Manager) DestroySessionInfo(sessionId string) {
+    delete(m.database, sessionId)
+  }
+  ```
+
+  <table>
+  	<tr>
+  		<th>パッケージ名</th>
+  		<th>機能概要</th>
+  	</tr>
+  	<tr>
+  		<td>crypto/rand</td>
+  		<td>疑似乱数生成を行う</td>
+  	</tr>
+  	<tr>
+  		<td>encoding/base64</td>
+  		<td>base64でエンコーディングを行う</td>
+  	</tr>
+  	<tr>
+  		<td>errors</td>
+  		<td>エラー管理を行う</td>
+  	</tr>
+  	<tr>
+  		<td>io</td>
+  		<td>入出力処理を行う</td>
+  	</tr>
+  	<tr>
+  		<td>net/http</td>
+  		<td>HTTPを扱うパッケージで、HTTPクライアントとHTTPサーバーを実装するために必要な機能が提供されている。</td>
+  	</tr>
+  </tabel>
