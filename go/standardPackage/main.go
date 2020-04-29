@@ -1,6 +1,7 @@
 package main
 
 import (
+	"./pkgMath"
 	"./pkgOS"
 	"./pkgTime"
 	"fmt"
@@ -10,6 +11,7 @@ import (
 const (
 	OS   = "os"
 	TIME = "time"
+	MATH = "math"
 )
 
 var (
@@ -23,6 +25,8 @@ func main() {
 		pkgOS.FirstOsPackageSummaryCall()
 	case TIME:
 		pkgTime.TimePackageSummary()
+	case MATH:
+		pkgMath.MathPackageSummary()
 	//TODO: (time, json , ioutil..etc)
 	default:
 		fmt.Printf("%s", "Another Package")
