@@ -53,4 +53,6 @@ func MathPackageSummary() {
 	seedSrc := rand.NewSource(time.Now().UnixNano())
 	rnd := rand.New(seedSrc)
 	fmt.Println(rnd.Intn(100))
+
+	fmt.Println(1<<7 - 1)
 }
