@@ -11,8 +11,27 @@
     ├── manager.go
     └── session.go
 ```
+<table>
+  <tr>
+    <th>ファイル名</th>
+    <th>機能として実装するべき内容</th>
+  </tr>
+  <tr>
+    <td>manager.go</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>session.go</td>
+    <td><li>セッション構造体の定義</li>
+        <li>セッションのインスタンス化</li>
+        <li>セッション変数の取り扱い</li>
+    </td>
+  </tr>
+</table>
 では早速 <span style="color: red; ">manager.go</span>から実装していきます。
 今回使用するパッケージについては以下とします。
+
+### セッションマネージャの実装を行う
 
 - [ ] セッションマネージャ構造体の定義を行う
 
@@ -140,7 +159,7 @@
   突き合わせの結果存在するセッション情報であればその値(session構造体)をinterface{}から取り出します。
 
   ```go
-  func (m *Manager) GetSessionInfo(r *http.Request , cookieName string) {
+  func (m *Manager) GetSessionInfo(r *http.Request , cookieName string) (*Session, error) {
     cookie , err := r.Cookie(cookieName)
     if err != nil {
       return nil, err
@@ -164,29 +183,71 @@
   }
   ```
 
-  <table>
-  	<tr>
-  		<th>パッケージ名</th>
-  		<th>機能概要</th>
-  	</tr>
-  	<tr>
-  		<td>crypto/rand</td>
-  		<td>疑似乱数生成を行う</td>
-  	</tr>
-  	<tr>
-  		<td>encoding/base64</td>
-  		<td>base64でエンコーディングを行う</td>
-  	</tr>
-  	<tr>
-  		<td>errors</td>
-  		<td>エラー管理を行う</td>
-  	</tr>
-  	<tr>
-  		<td>io</td>
-  		<td>入出力処理を行う</td>
-  	</tr>
-  	<tr>
-  		<td>net/http</td>
-  		<td>HTTPを扱うパッケージで、HTTPクライアントとHTTPサーバーを実装するために必要な機能が提供されている。</td>
-  	</tr>
-  </tabel>
+### 個々のセッションに関する機能の実装
+
+  - [ ] セッション構造体の定義を行う
+
+    ここで大切なフィールドは`manager`と`Value`になります。
+    それぞれの役割について簡単に述べていきます。
+
+    ```
+    manager: 複数のセッションを管理するための仕組みを提供するオブジェクト
+    Value  : セッションに紐づけたい任意の情報を格納するためのマップでセッション変数に該当する
+    ```
+    ```go
+    type Session struct {
+      cookieName string
+      Id      string
+      manager *manager
+      request *http.Request
+      writer  httpResponseWriter
+      Value   map[string]interface{}
+    }
+    ```
+  - [ ] 新規セッションの作成
+
+    ここで`セッションID`, `HTTPリクエスト`、`ResponseWriter`等の初期化は行わず
+    これらの値についてはセッションマネージャー側に持たせます。
+    ```go
+    func NewSession(manager *Manager, cookieName string) *Session {
+      // Session 構造体の初期化を行っている
+      return &Session{
+        cookieName: cookieName,
+        Manager: manager,
+        Value  : map[string]interface{}{},
+      }
+    }
+    ```
+
+  - [ ] セッションの開始を行う
+
+    既存のセッション情報であるかをセッションマネージャ側のメソッドで判断を行います。
+    次にこのメソッドから返却されるセッション構造体をポインタで参照することにより
+    セッション構造体が実体として存在するかを見極めます。
+
+    ```go
+    session, err = manager.GetSessionInfo(ctx.Request, cookieName)
+    if *session == nil {
+
+    }
+    ```
+    ```go
+    func BeginSession(sessionName, cookieName string, manager *Manager) gin.HundlerFunc {
+      return func (ctx *gin.Context){
+          var session *Session
+          var err error
+          session, err = manager.GetSessionInfo(ctx.Request, cookieName)
+          if *session != nil {
+            session , err = manager.New(ctx.Request, cookieName)
+            if err != nil {
+              log.Println(err.Error())
+              ctx.Abort()
+            }
+          }
+          session.writer =ctx.Writer
+          ctx.Set(sessionName, session)
+          defer context.Clear(ctx.Request)
+          ctx.Next()
+      }
+    }
+    ```
