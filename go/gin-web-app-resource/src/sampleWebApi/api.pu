@@ -1,0 +1,35 @@
+@startuml
+!include ./config.txt
+title Web API DDD Design
+package /domain {
+  class LanguageModel {
+    - id string
+    - name string
+  ---
+  + func ResultLanguageRecord (Id string)　string
+  + func ResultLanguageRecords (Id string) [] string
+  }
+    package /repositry {
+      interface LanguageRepository {
+        +  GetByLanguageId (db *gorm.DB , Id string) (*domain.LanguageModel , error)
+        +  GetByLanguageIds (db *gorm.DB) ([]*domain.LanguageModel , error)
+        +  CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error
+      }
+    }
+    package /service {
+      interface LanguageService {
+        +  OperateLanguage (db *gorm.DB , Id string Name String, Mode int) *Language
+      }
+    }
+}
+package /infrastructure {
+  class LanguageDTO {
+    LanguageDTO : struct
+    ---
+    + func (lang *LanguageModel) GetByLanguageId (db *gorm.DB, Id string) (*LanguageDTO error)
+    + func (lang *LanguageModel) GetByLanguageIds (db *gorm.DB) (*[]LanguageDTO , error)
+    + func (lang *LanguageModel) CUDOperationRecord (db *gorm.DB , Id,Name string , Mode int) error
+  }
+}
+
+@enduml
