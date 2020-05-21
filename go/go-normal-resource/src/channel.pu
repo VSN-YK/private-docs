@@ -1,0 +1,18 @@
+
+@startuml
+!include ./config.txt
+title Basic of Channel Control
+|#HotPink|main()|
+start
+  :main();
+  :make(chan <T>);
+  |#LightGreen|Goroutine()|
+  partition "Channel Control Range" {
+    fork
+      :Goroutine1;
+    fork again
+      :Goroutine2;
+    end fork
+  }
+stop
+@enduml

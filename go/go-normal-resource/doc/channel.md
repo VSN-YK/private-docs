@@ -189,10 +189,9 @@ func showCuurentPidInfo() {
 ```
 Channel は goroutine 間でのメッセージパッシングをするためのもの
 ```
+ベーシックなモデル図
 
-メッセージパッシングとは?
-```
-```
+![](./image/channel.png)
 
 Channelの初期化について
 
@@ -386,3 +385,5 @@ func main() {
 }
 
 ```
+
+## ChannelとMutixの使い分け
