@@ -2,20 +2,36 @@ package main
 
 import (
 	"fmt"
+	"reflect"
+	"sync"
 	"time"
 )
 
 func main() {
-	m1 := make(chan string)
-	go func() {
-		time.Sleep(time.Second * 10)
-		m1 <- "Done!"
-	}()
+	var mtx sync.Mutex
+	fmt.Printf("%+v", mtx)
+	c := make(chan bool)
 
-	select {
-	case passingMessage := <-m1:
-		fmt.Println(passingMessage)
-	case <-time.After(2 * time.Second):
-		fmt.Println("m1 goroutine was.......Time Out......")
+	for i := 0; i < 5; i++ {
+		mtx.Lock()
+		fmt.Printf("%+v", mtx)
+		go func(i int) {
+			time.Sleep(500 * time.Millisecond)
+			fmt.Println(i)
+			mtx.Unlock()
+			c <- true
+		}(i)
+	}
+
+	for i := 0; i < 5; i++ {
+		<-c
+	}
+}
+
+func showStructObjField(obj interface{}) {
+	typ := reflect.TypeOf(obj)
+	for i := 0; i < typ.NumField(); i++ {
+		f := typ.Field(i)
+		fmt.Println(f.Name)
 	}
 }

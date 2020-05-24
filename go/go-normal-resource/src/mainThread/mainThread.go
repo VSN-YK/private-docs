@@ -1,19 +1,22 @@
 package main
 
 import (
-	"./channelBuffer"
+	//	"./channelBuffer"
 	"./mthread"
 	"fmt"
 	"github.com/mitchellh/go-ps"
+	"log"
 	"os"
 	"time"
 )
 
 const (
-	RUNNING_COUNTER = 3
+	RUNNING_COUNTER  = 3
+	GO_PROCEE_SUFFIX = "go"
 )
 
 func main() {
+	fmt.Printf("Go Process:%s\n", showGoProcess())
 	mthread.MainIsGoRoutine()
 	loopProc("This is Called by MainThread")
 	go loopProc("This is Called by SubThread")
@@ -21,7 +24,7 @@ func main() {
 	fmt.Println("Done!")
 
 	fmt.Println("Channel Buffer Sample")
-	channelBuffer.ChannelBufferSummary()
+	//channelBuffer.ChannelBufferSummary()
 }
 
 func loopProc(title string) {
@@ -35,4 +38,18 @@ func showCuurentPidInfo() {
 	pid := os.Getpid()
 	pidInfo, _ := ps.FindProcess(pid)
 	fmt.Printf("%v\n", pidInfo)
+}
+
+func showGoProcess() string {
+	processList, err := ps.Processes()
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+	for _, process := range processList {
+		if process.Executable() == GO_PROCEE_SUFFIX {
+			return process.Executable()
+		}
+	}
+	return ""
+
 }

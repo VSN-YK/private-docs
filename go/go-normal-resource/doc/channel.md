@@ -386,4 +386,80 @@ func main() {
 
 ```
 
-## ChannelとMutixの使い分け
+## ChannelとMutexの使い分け
+
+[参考文献:GoでMutex対Channelを使用して状態を同期する](https://ja.bccrwp.org/compare/synchronizing-states-using-mutex-vs-channel-in-go-67959c/)
+
+そもそも`Mutex`とは？
+
+```
+排他制御を行う仕組みのひつであり、セマフォと類似する性質を持っている。
+```
+
+[セマフォについてはデータベースで排他処理を実現するためには必要不可欠なオブジェクトです。](https://wa3.i-3-i.info/word13357.html)
+
+GoにおけるMutexの位置付けにあるパッケージは`Syncパッケージ`です。
+
+#### MutexとChannelの使い分けを示した表
+
+<table>
+	<tr>
+		<th>Channel</th>
+		<th>mutex</th>
+	</tr>
+	<tr>
+		<td>
+			<li>データ所有権の譲渡</li>
+			<li>分散処理</li>
+			<li>非同期処理の結果の通信</li>
+		</td>
+		<td>
+			<li>キャッシュ</li>
+			<li>ステート(オブジェクトの状態)</li>
+		</td>
+	</tr>
+</table>
+
+※下記のコードは`非同期処理の結果の通信`に分類されるものなのでmutexを使用せずにGoroutineだけでも制御可能であるが、mutexの挙動を確認できるので一例としてあげておきます。
+```go
+package main
+
+import (
+	"fmt"
+	"sync"
+	"time"
+)
+
+func main() {
+	var mtx sync.Mutex
+	fmt.Printf("%+v", mtx)
+	c := make(chan bool)
+
+	for i := 0; i < 5; i++ {
+		mtx.Lock()
+		fmt.Printf("%+v", mtx)
+		go func(i int) {
+			time.Sleep(500 * time.Millisecond)
+			fmt.Println(i)
+			mtx.Unlock()
+			c <- true
+		}(i)
+	}
+
+	for i := 0; i < 5; i++ {
+		<-c
+	}
+}
+```
+コンソールログ
+
+ログをみると[Mutex構造体](https://github.com/golang/go/blob/master/src/sync/mutex.go#L25)のメンバー変数である`state`が変位していることがわかると思います。
+上段で述べたよう`Mutex`はセマフォと性質を持っているため、`stateが0である場合はBusyではない`ことを示しており、`逆にstateが1である場合はBusyである(Lock)`されていることを示しております。
+```sh
+$ go run ./channel.go
+{state:0 sema:0}{state:1 sema:0}0
+{state:1 sema:0}1
+{state:1 sema:0}2
+{state:1 sema:0}3
+{state:1 sema:0}4
+```
