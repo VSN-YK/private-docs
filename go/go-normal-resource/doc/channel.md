@@ -191,7 +191,7 @@ Channel は goroutine 間でのメッセージパッシングをするための�
 ```
 ベーシックなモデル図
 
-![](./image/channel.png)
+![image](https://user-images.githubusercontent.com/60165356/82749969-e6003180-9de7-11ea-9f46-7306c2377b8f.png)
 
 Channelの初期化について
 
