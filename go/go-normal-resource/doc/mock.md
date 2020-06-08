@@ -160,4 +160,49 @@ $ go test -v
     mock_test.go:23: result: Succeess!!
     mock_test.go:26: result: 0
 PASS
-ok  	interface-test/mockTest	0.112s```
+ok  	interface-test/mockTest	0.112s
+```
+
+### 3.Mockを実装してみる
+
+mockを実行するにあたり、`interface`について理解しておく必要があるので、復習がてらに記述しておきます。
+
+```go
+package main
+
+import (
+	"fmt"
+	"log"
+)
+
+type MyInterface interface {
+	Method(args []string) (string, error)
+}
+
+type ImplA struct{}
+
+func (a *ImplA) Method(args []string) (string, error) {
+	return fmt.Sprintf("Implementation By ImplA"), nil
+}
+
+type ImplB struct{}
+
+func (b *ImplB) Method(args []string) (string, error) {
+	return fmt.Sprintf("Implementation By ImplB"), nil
+}
+
+func main() {
+	var a, b MyInterface
+	a = &ImplA{}
+	b = &ImplB{}
+
+	fmt.Println(a.Method([]string{}))
+	fmt.Println(b.Method([]string{}))
+}
+
+```
+コンソールログ
+```sh
+Implementation By ImplA <nil>
+Implementation By ImplB <nil>
+```
