@@ -9,6 +9,7 @@ dockerhubとlocalの間に位置しプライベートで管理したいdockerイ
 ```
 
 プライベートレジストリの概要図
+
 ![image](https://user-images.githubusercontent.com/60165356/81753909-cd427280-94ef-11ea-93f6-8bd34ded3af8.png)
 
 ## Private Registoryの作成
