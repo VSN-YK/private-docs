@@ -6,14 +6,17 @@ import java.sql.SQLException;
 import db.helper.connect.ConnectionHelper;
 
 public class Dao {
-	private Connection conn;
-	
-	public Connection getConnection() throws SQLException {
-		ConnectionHelper helper = new ConnectionHelper().getConnect("");
-		return helper.getConnection();
-	}
 
-	public Connection getConn() {
+	protected Connection conn;
+
+	public Dao() throws SQLException {
+		if (this.conn == null) {
+			ConnectionHelper helper = new ConnectionHelper().getConnect("");
+			this.conn = helper.getConnection();
+		}
+	}
+	
+	public Connection getConnection() {
 		return this.conn;
-	}	
+	}
 }

@@ -1,8 +1,8 @@
 package service;
 
-import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.List;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -11,10 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.dao.Dao;
 import model.dao.DaoFactory;
+import model.dao.LoginDao;
+import model.dto.LoginDto;
+
 @WebServlet("/login")
 public class BasicLoginAuthServlet extends HttpServlet {
-	protected Connection conn;
 	// スーパクラスであるHttpServletのコンストラクタを呼び出す。
+	LoginDao loginDao;
+
 	public BasicLoginAuthServlet() {
 		super();
 	}
@@ -23,26 +27,28 @@ public class BasicLoginAuthServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) {
 		try {
-			Dao dao = DaoFactory.createDao();
-			this.conn = dao.getConnection();
-			ResultSet rs = conn.createStatement().executeQuery("SELECT * FROM LANGUAGE_TBL");
-			if(getBasicAuth(rs,"L001","Node.js")) {
+
+			loginDao = DaoFactory.createLoginDao();
+
+			if(getBasicAuth(loginDao.selectAll(),"L001","Node.js")) {
 				// ログイン成功ページへフォワード
+				System.out.println("認証に成功しました。");
 			}else {
 				// ログイン失敗ページへリダイレクト
+				System.out.println("認証失敗しました。");
 			}
 		} catch (SQLException e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}finally {
-			try {
-				this.conn.close();
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
+				Dao dao = loginDao;
+				try {
+					dao.getConnection().close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
 			}
 		}
-	}
+	
 
 	/**
 	 * BASIC認証を行うビジネスメソッド
@@ -52,9 +58,27 @@ public class BasicLoginAuthServlet extends HttpServlet {
 	 * @return
 	 * @throws SQLException
 	 */
-	private boolean getBasicAuth(ResultSet rs ,String id , String name) throws SQLException {
-		while(rs.next()) {
-			if( (id.equals(rs.getString("id"))) && (name.equals(rs.getString("name"))) ){
+	private boolean getBasicAuth(ResultSet rs, String id, String name) throws SQLException {
+		while (rs.next()) {
+			if ((id.equals(rs.getString("id"))) && (name.equals(rs.getString("name")))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * BASIC認証を行うビジネスメソッド(オーバロード)
+	 * @param loginList
+	 * @param id
+	 * @param name
+	 * @return boolean
+	 * @throws SQLException
+	 */
+
+	private boolean getBasicAuth(List<LoginDto> loginList, String id, String name) throws SQLException {
+		for (LoginDto l : loginList) {
+			if ((l.getId().equals(id)) && (l.getName().equals(name))) {
 				return true;
 			}
 		}
