@@ -1,5 +1,8 @@
 # dockerの知識
 
+// comment OSS系 の使ってみた記事には公式のURLとか張っておくと、情報が足りないときはそっち見ればいいよ、ってなるので親切ですね。
+// docker なら https://www.docker.com/ だけど、この記事的には Docker CLI がいいかもね https://docs.docker.jp/engine/reference/commandline/toc.html
+
 ## Dockerfileの書き方について
 
 - [ ] Dockerfileとは
